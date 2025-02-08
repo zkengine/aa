@@ -1,5 +1,5 @@
 {
-  "name": "aa",
+  "name": "automatic-agent-ui",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,19 +9,56 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@ai-sdk/azure": "^1.1.9",
+    "@ai-sdk/openai": "^1.1.9",
+    "@coinbase/coinbase-sdk": "^0.17.0",
+    "@coinbase/onchainkit": "^0.36.10",
+    "@privy-io/react-auth": "^2.4.2",
+    "@privy-io/server-auth": "^1.18.7",
+    "@privy-io/wagmi": "^1.0.3",
+    "@tanstack/react-query": "^5.66.0",
+    "@vercel/functions": "^2.0.0",
+    "ai": "^4.1.26",
+    "axios": "^1.7.9",
+    "clsx": "^2.1.1",
+    "cookies-next": "^5.1.0",
+    "date-fns": "^4.1.0",
+    "graphql": "^16.10.0",
+    "graphql-request": "^7.1.2",
+    "imask": "^7.6.1",
+    "immer": "^10.1.1",
+    "lucide-react": "^0.475.0",
+    "next": "15.1.6",
+    "nillion-sv-wrappers": "^1.0.9",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "next": "15.1.6"
+    "shadcn": "^2.3.0",
+    "tailwind-merge": "^3.0.1",
+    "tailwindcss-animate": "^1.0.7",
+    "use-immer": "^0.11.0",
+    "uuid": "^11.0.5",
+    "viem": "^2.22.23",
+    "wagmi": "^2.14.11",
+    "zod": "^3.24.1",
+    "zustand": "^5.0.3"
   },
   "devDependencies": {
-    "typescript": "^5",
+    "@eslint/eslintrc": "^3",
+    "@trivago/prettier-plugin-sort-imports": "^5.2.2",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "postcss": "^8",
-    "tailwindcss": "^3.4.1",
+    "concurrently": "^9.1.2",
     "eslint": "^9",
     "eslint-config-next": "15.1.6",
-    "@eslint/eslintrc": "^3"
+    "eslint-config-prettier": "^10.0.1",
+    "eslint-plugin-prettier": "^5.2.3",
+    "postcss": "^8",
+    "prettier": "^3.4.2",
+    "prettier-plugin-tailwindcss": "^0.6.11",
+    "sharp": "^0.33.5",
+    "tailwindcss": "^3.4.1",
+    "tsup": "^8.3.6",
+    "typescript": "^5"
   }
 }
