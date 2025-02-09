@@ -33,6 +33,7 @@ const Message: React.FC<Props> = ({ message, className, previousMessage, nextMes
         nextMessageSameRole && 'pb-0',
         previousMessageSameRole && 'pt-0',
         !nextMessageSameRole && 'border-b border-gray-200 dark:border-neutral-700',
+        isUser && '!flex-row-reverse !text-right',
         className,
       )}
     >

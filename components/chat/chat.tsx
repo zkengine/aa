@@ -10,7 +10,7 @@ const Chat: React.FC = () => {
   const { messages } = useChat();
 
   const cleanedMessages = messages.filter(message => message.role !== 'system');
-  console.log('cleanedMessages:', cleanedMessages);
+
   return (
     <div className="flex h-screen w-full flex-col items-center py-5">
       <div className="flex h-full w-full max-w-full flex-col justify-between md:max-w-4xl">

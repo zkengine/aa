@@ -3,7 +3,7 @@
 import { Message, useChat as useAiChat } from 'ai/react';
 import React, { ReactNode, createContext, useContext, useEffect, useMemo, useState } from 'react';
 import { useShallow } from 'zustand/react/shallow';
-import { generateId } from 'ai';
+import { v4 as uuidv4 } from 'uuid';
 import { useAccount } from 'wagmi';
 import useBoundStore from '@/store';
 import { ACTION_NAMES } from '@/utils/constants';
@@ -46,15 +46,14 @@ export const ChatProvider: React.FC<ChatProviderProps> = ({ children }) => {
 
   const [isResponseLoading, setIsResponseLoading] = useState(false);
 
-  const { chatId, setChatId } = useBoundStore(
-    useShallow(state => ({ chatId: state.chatId, setChatId: state.setChatId })),
+  const { chatId, setChatId, showGlobalLoading, setGlobalLoading } = useBoundStore(
+    useShallow(state => ({
+      chatId: state.chatId,
+      setChatId: state.setChatId,
+      showGlobalLoading: state.showGlobalLoading,
+      setGlobalLoading: state.setGlobalLoading,
+    })),
   );
-
-  useEffect(() => {
-    if (!chatId) {
-      setChatId(generateId());
-    }
-  }, [chatId, setChatId]);
 
   const {
     messages,
@@ -63,17 +62,42 @@ export const ChatProvider: React.FC<ChatProviderProps> = ({ children }) => {
     append,
     isLoading,
     addToolResult: addToolResultBase,
+    setMessages,
   } = useAiChat({
     maxSteps: 20,
     onResponse: () => {
       setIsResponseLoading(false);
     },
-    api: '/api/chat/agent',
+    api: '/api/agent',
     body: {
       userId: address,
       chatId,
     },
   });
+
+  useEffect(() => {
+    const fetchChat = async () => {
+      if (!chatId) return;
+
+      try {
+        const chat = await fetch(`/api/chats/${chatId}`);
+        const chatData = await chat.json();
+        if (chatData && chatData.data) {
+          setMessages(chatData.data.messages);
+        }
+      } catch (error) {
+        console.error('Error fetching chat:', error);
+      } finally {
+        setGlobalLoading(false);
+      }
+    };
+
+    if (address) {
+      setChatId(!chatId ? uuidv4() : chatId);
+      setGlobalLoading(true);
+      fetchChat();
+    }
+  }, [address, chatId, setChatId, setGlobalLoading, setMessages]);
 
   const addToolResult = <T,>(toolCallId: string, result: ToolResult<T>) => {
     addToolResultBase({
@@ -85,14 +109,17 @@ export const ChatProvider: React.FC<ChatProviderProps> = ({ children }) => {
   useEffect(() => {
     const updateChat = async () => {
       if (messages.length > 0 && !isLoading) {
-        const response = await fetch(`/api/chats/${chatId}`, {
-          method: 'POST',
-          body: JSON.stringify({
-            messages,
-          }),
-        });
-        const data = await response.json();
-        console.log('chat data:::', data);
+        try {
+          const response = await fetch(`/api/chats/${chatId}`, {
+            method: 'POST',
+            body: JSON.stringify({
+              messages,
+            }),
+          });
+          await response.json();
+        } catch (error) {
+          console.error('Error updating chat:', error);
+        }
       }
     };
 
@@ -156,7 +183,7 @@ export const ChatProvider: React.FC<ChatProviderProps> = ({ children }) => {
         input,
         setInput,
         onSubmit,
-        isLoading,
+        isLoading: isLoading || showGlobalLoading,
         sendMessage,
         isResponseLoading,
         addToolResult,

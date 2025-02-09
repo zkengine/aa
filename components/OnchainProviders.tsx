@@ -19,14 +19,6 @@ const queryClient = new QueryClient({
 });
 
 const OnchainProviders = ({ children }: { children: ReactNode }) => {
-  console.log(
-    'ENVIRONMENT_VARIABLES[ENVIRONMENT.API_KEY]',
-    ENVIRONMENT_VARIABLES[ENVIRONMENT.API_KEY],
-  );
-  console.log(
-    'ENVIRONMENT_VARIABLES[ENVIRONMENT.CDP_PROJECT_ID]',
-    ENVIRONMENT_VARIABLES[ENVIRONMENT.CDP_PROJECT_ID],
-  );
   return (
     <WagmiProvider config={getConfig()}>
       <QueryClientProvider client={queryClient}>

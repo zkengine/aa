@@ -23,7 +23,6 @@ import {
 
 const NotLoggedInAlert: React.FC = () => {
   const { address, isConnected } = useAccount();
-  console.log(address, isConnected);
 
   return (
     <AlertDialog open={!isConnected && !address}>
