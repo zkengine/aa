@@ -42,7 +42,7 @@ interface ChatProviderProps {
 }
 
 export const ChatProvider: React.FC<ChatProviderProps> = ({ children }) => {
-  const { address } = useAccount();
+  const { address, isConnected } = useAccount();
 
   const [isResponseLoading, setIsResponseLoading] = useState(false);
 
@@ -183,11 +183,13 @@ export const ChatProvider: React.FC<ChatProviderProps> = ({ children }) => {
         input,
         setInput,
         onSubmit,
-        isLoading: isLoading || showGlobalLoading,
+        isLoading: isLoading || showGlobalLoading || !isConnected || !address,
         sendMessage,
         isResponseLoading,
         addToolResult,
-        inputDisabledMessage,
+        inputDisabledMessage: showGlobalLoading
+          ? 'Loading your chat history...'
+          : inputDisabledMessage,
       }}
     >
       {children}
