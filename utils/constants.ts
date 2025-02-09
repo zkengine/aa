@@ -18,3 +18,11 @@ export const ENVIRONMENT_VARIABLES: Record<EnvironmentKey, string | undefined> =
   [ENVIRONMENT.ENVIRONMENT]: process.env.NEXT_PUBLIC_VERCEL_ENV,
   [ENVIRONMENT.CDP_PROJECT_ID]: process.env.NEXT_PUBLIC_CDP_PROJECT_ID,
 };
+
+export const ACTION_NAMES = {
+  GET_WALLET_ADDRESS_NAME: 'getWalletAddress',
+  TRADE_NAME: 'trade',
+  STAKE_NAME: 'stake',
+  UNSTAKE_NAME: 'unstake',
+  TRANSFER_NAME: 'transfer',
+} as const;

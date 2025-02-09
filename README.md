@@ -1,4 +1,6 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# The Automatic Agent UI
+
+Your personalized on-chain interaction agent, designed to automate and optimize your blockchain activities while ensuring top-tier security.
 
 ## Getting Started
 

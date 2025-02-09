@@ -6,6 +6,7 @@ import { DEFAULT_CHAIN } from '@/utils/constants';
 const createApplicationSlice: StateCreator<ApplicationSlice, [], [], ApplicationSlice> = set => ({
   showGlobalLoading: false,
   chain: DEFAULT_CHAIN,
+  chatId: null,
 
   setGlobalLoading: show =>
     set(
@@ -21,6 +22,13 @@ const createApplicationSlice: StateCreator<ApplicationSlice, [], [], Application
       }),
     ),
 
+  setChatId: chatId =>
+    set(
+      produce(state => {
+        state.chatId = chatId;
+      }),
+    ),
+
   resetAppData: () =>
     set(
       produce(state => {
@@ -28,6 +36,7 @@ const createApplicationSlice: StateCreator<ApplicationSlice, [], [], Application
         state.showMenu = true;
         state.hasPermission = undefined;
         state.chain = DEFAULT_CHAIN;
+        state.chatId = null;
       }),
     ),
 });

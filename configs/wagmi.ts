@@ -9,10 +9,12 @@ export function getConfig() {
       coinbaseWallet({
         appName: 'Automatic Agent',
         preference: 'smartWalletOnly',
+        reloadOnDisconnect: true,
       }),
       coinbaseWallet({
         appName: 'Automatic Agent',
         preference: 'eoaOnly',
+        reloadOnDisconnect: true,
       }),
       walletConnect({
         projectId: process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID!,

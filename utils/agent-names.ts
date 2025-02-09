@@ -1,0 +1,9 @@
+export const KNOWLEDGE_AGENT_NAME = 'Knowledge Agent';
+export const MARKET_AGENT_NAME = 'Market Agent';
+export const STAKING_AGENT_NAME = 'Staking Agent';
+export const WALLET_AGENT_NAME = 'Wallet Agent';
+export const TOKEN_ANALYSIS_AGENT_NAME = 'Token Analysis Agent';
+export const TRADING_AGENT_NAME = 'Trading Agent';
+export const SOCIAL_AGENT_NAME = 'Social Agent';
+export const LIQUIDITY_AGENT_NAME = 'Liquidity Agent';
+export const TRANSFER_AGENT_NAME = 'Transfer Agent';

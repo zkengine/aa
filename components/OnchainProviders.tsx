@@ -6,6 +6,7 @@ import { OnchainKitProvider } from '@coinbase/onchainkit';
 import { WagmiProvider } from 'wagmi';
 import { hashFn } from 'wagmi/query';
 import { getConfig } from '@/configs/wagmi';
+import { ChatProvider } from '@/contexts/chat';
 import { DEFAULT_CHAIN, ENVIRONMENT, ENVIRONMENT_VARIABLES } from '@/utils/constants';
 
 const queryClient = new QueryClient({
@@ -18,6 +19,14 @@ const queryClient = new QueryClient({
 });
 
 const OnchainProviders = ({ children }: { children: ReactNode }) => {
+  console.log(
+    'ENVIRONMENT_VARIABLES[ENVIRONMENT.API_KEY]',
+    ENVIRONMENT_VARIABLES[ENVIRONMENT.API_KEY],
+  );
+  console.log(
+    'ENVIRONMENT_VARIABLES[ENVIRONMENT.CDP_PROJECT_ID]',
+    ENVIRONMENT_VARIABLES[ENVIRONMENT.CDP_PROJECT_ID],
+  );
   return (
     <WagmiProvider config={getConfig()}>
       <QueryClientProvider client={queryClient}>
@@ -33,13 +42,13 @@ const OnchainProviders = ({ children }: { children: ReactNode }) => {
               theme: 'default',
             },
             wallet: {
-              display: 'modal',
+              display: 'classic',
               termsUrl: 'https://www.coinbase.com/legal/cookie',
               privacyUrl: 'https://www.coinbase.com/legal/privacy',
             },
           }}
         >
-          {children}
+          <ChatProvider>{children}</ChatProvider>
         </OnchainKitProvider>
       </QueryClientProvider>
     </WagmiProvider>
