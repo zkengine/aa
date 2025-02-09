@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { SecretVaultWrapper } from 'nillion-sv-wrappers';
 // @ts-ignore
+import { SecretVaultWrapper } from 'nillion-sv-wrappers';
 import { orgConfig } from '@/configs/nillion';
 
 interface Message {
@@ -77,7 +77,7 @@ export const POST = async (
     };
 
     const readRecord = await collection.readFromNodes(filterById);
-    console.log('📚 Read new records:', JSON.stringify(readRecord));
+    // console.log('📚 Read new records:', JSON.stringify(readRecord));
     if (readRecord?.length === 0) {
       await collection.writeToNodes([{ ...record, _id: chatId }]);
     } else {
